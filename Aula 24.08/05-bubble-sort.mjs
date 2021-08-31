@@ -33,13 +33,13 @@ function bubbleSort(vetor) {
     } while(trocou)
 }
 
-// let nums = [ 77, 44, 22, 99, 55, 88, 0, 33, 22, 11]
+ let nums = [ 77, 44, 22, 99, 55, 88, 0, 33, 22, 11]
 
 // Pior caso
 // let nums = [99, 88, 77, 66, 55, 44, 33, 22, 11, 0]
 
 // Melhor caso
-let nums = [0, 11, 22, 33, 44, 55, 66, 77, 88, 99]
+//let nums = [0, 11, 22, 33, 44, 55, 66, 77, 88, 99]
 
 bubbleSort(nums)
 console.log(nums)
