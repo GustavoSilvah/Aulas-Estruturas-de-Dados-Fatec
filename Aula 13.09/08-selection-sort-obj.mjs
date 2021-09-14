@@ -51,7 +51,9 @@ selectionSort(objMotoristas, (elem1, elem2) => {
     else return elem1.razao_social > elem2.razao_social 
 })
 
+let memoriaMB = process.memoryUsage().heapUsed / 1024 / 1024
+
 console.timeEnd('Tempo de ordenação')
 
 console.log(objMotoristas)
-console.log({pass, comps, trocas})
+console.log({pass, comps, trocas, memoriaMB})

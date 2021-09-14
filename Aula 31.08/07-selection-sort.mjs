@@ -53,7 +53,8 @@ import { nomes } from '../data/nomes-desord.mjs'
 
 console.time('Tempo de ordenação')
 selectionSort(nomes)
+let memoriaMB = process.memoryUsage().heapUsed / 1024 / 1024
 console.timeEnd('Tempo de ordenação')
 
 console.log(nomes)
-console.log({pass, comps, trocas})
+console.log({pass, comps, trocas, memoriaMB})
