@@ -28,8 +28,131 @@ class FormaGeometrica {
        // e os armazena os atributos internos #base, #altura e #tipo.
        // Toda vez que nos referimos a um atributo ou método ( que pertencem
        // à classe), precisamos prefixá-las com this + ponto.
-       this.#base = base
-       this.#altura = altura
-       this.#tipo = tipo
+
+       // Validações
+       /*if(typeof base !== 'number' || base <= 0) {
+           //gera um erro e aborta a criação do objeto
+           throw new Error('ERRO: a base precisa ser numérica e maior que zero.')
+       }
+
+       if(typeof base !== 'number' || altura <= 0) {
+           throw new Error('ERRO: a altura precisa ser numérica e maior que zero.')
+       }
+
+       //if(tipo !== 'R' && tipo !== 'T' && tipo !== 'E'){
+        if(! ['R', 'T', 'E'].includes(tipo)) {
+           throw new Error('ERRO: a tipo precisa ser um dos valores: "R", "T" ou "E".')
+       }
+       */
+
+       // Chamando os setters das propriedades para fazer a validação
+       this.base = base
+       this.altura = altura
+       this.tipo = tipo
    }
+
+   // Funções getter: têm a finalidade de tornar visíveis ao mundo externo
+   // informações armazenadas em atributos privados de uma classe.
+   get base() {
+       return this.#base
+   }
+
+   get altura() {
+       return this.#altura
+   }
+
+   get tipo() {
+       return this.#tipo
+   }
+
+   // Funções setter: permitem que o valor de atributos privados sejam alterados
+   // do lado de fora da classe.
+   set base(valor) {
+
+    if(typeof valor !== 'number' || valor <= 0) {
+        throw new Error('ERRO: a base precisa ser numérica e maior que zero.')
+    }
+
+       this.#base = valor
+       //console.log(`Alterado o valor do atributo #base para ${valor}.`)
+   }
+
+   set altura(valor) {
+
+        if(typeof valor !== 'number' || valor <= 0) {
+            throw new Error('ERRO: a altura precisa ser numérica e maior que zero.')
+        }
+
+       this.#altura = valor
+   }
+
+   set tipo(valor) {
+        if(! ['R', 'T', 'E'].includes(valor)) {
+            throw new Error('ERRO: a tipo precisa ser um dos valores: "R", "T" ou "E".')
+        }
+
+       this.#tipo = valor
+   }
+
+   /*
+        PROPRIEDADES: são estrutas presentes em uma classe que permitem ler e/ou
+        alterar o valor de um atributo privado.
+        Uma propriedade é formada, pelo menos, por uma função getter.
+        Propriedades de leitura e escrita têm tanto um getter quanto um setter.
+        O nome da propriedade é o nome das funções getter/setter correspondentes
+   */
+
+    // Método ppúblico
+    calcArea() {
+        switch(this.tipo) {
+            case 'R':
+                return this.base * this.altura
+            case 'T':
+                return this.base * this.altura / 2
+            case 'E':
+                return (this.base / 2) * (this.altura / 2) * Math.PI
+        }
+    }
+
+    // Alternativa: propriedade somente-leitura (sópossuir o getter)
+    get area() {
+        switch(this.tipo) {
+            case 'R':
+                return this.base * this.altura
+            case 'T':
+                return this.base * this.altura / 2
+            case 'E':
+                return (this.base / 2) * (this.altura / 2) * Math.PI
+        }
+    }
 }
+
+
+/************************************************************************* */
+
+// Criando objetos a partir da classe
+let forma1 = new FormaGeometrica(15, 16, 'T') // Isso chamará o construtor da classe
+
+// Uma função getter é chamada SEM a utilização dos parênteses
+console.log(forma1.base, forma1.altura, forma1.tipo)
+
+let forma2 = new FormaGeometrica(9.7, 5, 'E')
+console.log(forma2.base, forma2.altura, forma2.tipo)
+
+forma1.base = 7 // Chama a função setter
+forma1.altura = 22.5 // Chama a função setter
+forma1.tipo = "R" // Chama a função setter
+console.log(forma1.base, forma1.altura, forma1.tipo)
+
+let forma3 = new FormaGeometrica(14, 10, 'T')
+
+console.log('Área da forma1:', forma1.calcArea())
+console.log('Área da forma1:', forma2.calcArea())
+console.log('Área da forma1:', forma3.calcArea())
+
+console.log('Área da forma1:', forma1.area())
+console.log('Área da forma1:', forma2.area())
+console.log('Área da forma1:', forma3.area())
+
+// A propriedade "área" é somente-leitura - não pode ser modificada
+// forma2.area = 175
